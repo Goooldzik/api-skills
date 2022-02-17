@@ -10,6 +10,8 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'content', 'author'];
+
     public function delete()
     {
         $this->comments()->delete();
