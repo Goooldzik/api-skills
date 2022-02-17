@@ -10,6 +10,13 @@ class Post extends Model
 {
     use HasFactory;
 
+    public function delete()
+    {
+        $this->comments()->delete();
+
+        return parent::delete();
+    }
+
     /**
      * @return  HasMany
      */
