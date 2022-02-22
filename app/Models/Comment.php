@@ -11,6 +11,10 @@ class Comment extends Model
 {
     use HasFactory, DateTrait;
 
+    protected $fillable = [
+        'content', 'author'
+    ];
+
     /**
      * @return  BelongsTo
      */
