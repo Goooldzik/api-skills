@@ -16,7 +16,9 @@ php artisan migrate --seed
     <li><strong>Skonfiguruj virtual host dla aplikacji!</strong></li>
 </ol>
 <h2>API</h2>
-<strong>DO POPRAWNEGO DZIAŁANIA API ZALECA SIĘ USTAWIENIE W HEADERS ACCEPT NA APPLICATION/JSON</strong>
+<br />
+<strong>Do poprawnego działania API, zaleca się ustawienie w headers Accept na application/json</strong>
+<br />
 <br />
 <table>
     <thead>
