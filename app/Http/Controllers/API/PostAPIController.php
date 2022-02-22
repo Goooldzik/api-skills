@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Services\API\PostAPIService;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class PostAPIController extends Controller
@@ -27,11 +28,12 @@ class PostAPIController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param   $page
      * @return  JsonResponse
      */
-    public function index(): JsonResponse
+    public function index($page = 1): JsonResponse
     {
-        return $this->postAPIService->index();
+        return $this->postAPIService->index($page);
     }
 
     /**
