@@ -30,7 +30,7 @@ class PostService
      * @param   Request $request
      * @return  PromiseInterface|Response
      */
-    public function index(Request $request): PromiseInterface|Response
+    public function getAllPosts(Request $request): PromiseInterface|Response
     {
         return $this->http->get(route('api.posts.index'), ['page' => $request->get('page')]);
     }
@@ -39,7 +39,7 @@ class PostService
      * @param   PostRequest $request
      * @return  PromiseInterface|Response
      */
-    public function store(PostRequest $request): PromiseInterface|Response
+    public function storeNewPost(PostRequest $request): PromiseInterface|Response
     {
         return $this->http->post(route('api.posts.store'), $request);
     }
@@ -48,7 +48,7 @@ class PostService
      * @param   Post $post
      * @return  PromiseInterface|Response
      */
-    public function show(Post $post): PromiseInterface|Response
+    public function getPost(Post $post): PromiseInterface|Response
     {
         return $this->http->get(route('api.posts.show', $post));
     }
@@ -58,7 +58,7 @@ class PostService
      * @param   Post $post
      * @return  PromiseInterface|Response
      */
-    public function update(PostRequest $request, Post $post): PromiseInterface|Response
+    public function updatePost(PostRequest $request, Post $post): PromiseInterface|Response
     {
         return $this->http->put(route('api.posts.update', $post), $request);
     }
@@ -67,7 +67,7 @@ class PostService
      * @param   Post $post
      * @return  PromiseInterface|Response
      */
-    public function destroy(Post $post): PromiseInterface|Response
+    public function destroyPost(Post $post): PromiseInterface|Response
     {
         return $this->http->delete(route('api.posts.destroy', $post));
     }

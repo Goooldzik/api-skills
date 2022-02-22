@@ -41,6 +41,6 @@ class CreatePostJob implements ShouldQueue
             'author'    =>   'AutomaticPostJob'
         ]);
 
-        $api->store($request);
+        $api->storeNewPost($request);
     }
 }
