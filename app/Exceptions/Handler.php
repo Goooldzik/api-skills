@@ -35,10 +35,6 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
-
         $this->renderable(function (NotFoundHttpException $exception) {
             return response()->json([
                 'message' => 'Object not found!'
