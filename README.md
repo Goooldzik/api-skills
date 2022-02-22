@@ -14,6 +14,11 @@ php artisan migrate
 php artisan migrate --seed
 </pre></li>
     <li><strong>Skonfiguruj virtual host dla aplikacji!</strong></li>
+    <li>Do poprawnego działania zaplanowanych Jobów, należy uruchomić w tle dwie komendy <pre>
+php artisan queue:work
+</pre> oraz <pre>
+php artisan schedule:work
+</pre></li>
 </ol>
 <h2>API</h2>
 <br />
