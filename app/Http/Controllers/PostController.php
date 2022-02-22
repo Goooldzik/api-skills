@@ -3,22 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Services\PostService;
 use Illuminate\Contracts\View\View;
 
 class PostController extends Controller
 {
-    protected PostService $postService;
-
-    /**
-     * PostController constructor.
-     * @param   PostService $postService
-     */
-    public function __construct(PostService $postService)
-    {
-        $this->postService = $postService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +14,9 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        return $this->postService->index();
+        return view('posts.index', [
+            'posts' => Post::orderBy('id', 'desc')->paginate(15)
+        ]);
     }
 
     /**
@@ -37,6 +27,9 @@ class PostController extends Controller
      */
     public function show(Post $post): View
     {
-        return $this->postService->show($post);
+        return view('posts.show', [
+            'post' => $post,
+            'comments' => $post->comments()->paginate(15)
+        ]);
     }
 }

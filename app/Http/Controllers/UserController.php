@@ -3,25 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Services\UserService;
 use Illuminate\Contracts\View\View;
 
 class UserController extends Controller
 {
-    /**
-     * @var     UserService
-     */
-    protected UserService $userService;
-
-    /**
-     * UserController constructor.
-     * @param   UserService $userService
-     */
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +14,9 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        return $this->userService->index();
+        return view('users.index', [
+            'users' => User::paginate(15)
+        ]);
     }
 
     /**
@@ -40,6 +27,8 @@ class UserController extends Controller
      */
     public function show(User $user): View
     {
-        return $this->userService->show($user);
+        return view('users.show', [
+            'user' => $user
+        ]);
     }
 }

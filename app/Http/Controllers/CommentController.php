@@ -3,25 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Services\CommentService;
 use Illuminate\Contracts\View\View;
 
 class CommentController extends Controller
 {
-    /**
-     * @var     CommentService
-     */
-    protected CommentService $commentService;
-
-    /**
-     * CommentController constructor.
-     * @param   CommentService $commentService
-     */
-    public function __construct(CommentService $commentService)
-    {
-        $this->commentService = $commentService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +14,9 @@ class CommentController extends Controller
      */
     public function index(): View
     {
-        return $this->commentService->index();
+        return view('comments.index', [
+            'comments' => Comment::orderBy('id', 'desc')->paginate(15)
+        ]);
     }
 
     /**
@@ -40,6 +27,8 @@ class CommentController extends Controller
      */
     public function show(Comment $comment): View
     {
-        return $this->commentService->show($comment);
+        return view('comments.show', [
+            'comment' => $comment
+        ]);
     }
 }
