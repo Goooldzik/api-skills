@@ -27,12 +27,12 @@ class PostService
     }
 
     /**
-     * @param   int $page
+     * @param   Request $request
      * @return  PromiseInterface|Response
      */
-    public function index($page = 1): PromiseInterface|Response
+    public function index(Request $request): PromiseInterface|Response
     {
-        return $this->http->get(route('api.posts.index'), ['page' => $page]);
+        return $this->http->get(route('api.posts.index'), ['page' => $request->get('page')]);
     }
 
     /**
