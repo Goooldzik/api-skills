@@ -5,8 +5,8 @@ namespace App\Services\API;
 
 
 use App\Http\Requests\PostRequest;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 class PostAPIService
@@ -14,25 +14,15 @@ class PostAPIService
     /**
      * Display a listing of the resource.
      *
+     * @param   $page
      * @return  JsonResponse
      */
-    public function index(): JsonResponse
+    public function index($page): JsonResponse
     {
-        try {
-
-            return response()->json([
-                'status'    =>    'success',
-                'posts'     =>    Post::paginate(15)
-            ])->setStatusCode(200);
-
-        } catch (Exception $exception) {
-
-            return response()->json([
-                'status'    =>    'error',
-                'message'   =>    $exception->getMessage()
-            ])->setStatusCode(500);
-
-        }
+        return response()->json([
+            'success'   =>    true,
+            'posts'     =>    PostResource::collection(Post::paginate(15))
+        ])->setStatusCode(200);
     }
 
     /**
@@ -43,23 +33,14 @@ class PostAPIService
      */
     public function store(PostRequest $request): JsonResponse
     {
-        try {
 
-            Post::create($request->validated());
+        Post::create($request->validated());
 
-            return response()->json([
-                'status'    =>    'success',
-                'message'   =>    'Successful added post'
-            ])->setStatusCode(200);
+        return response()->json([
+            'success'   =>    true,
+            'message'   =>    'Successful added post'
+        ])->setStatusCode(201);
 
-        } catch (Exception $exception) {
-
-            return response()->json([
-                'status'    =>    'error',
-                'message'   =>    $exception->getMessage()
-            ])->setStatusCode(500);
-
-        }
     }
 
     /**
@@ -70,21 +51,10 @@ class PostAPIService
      */
     public function show(Post $post): JsonResponse
     {
-        try {
-
-            return response()->json([
-                'status'   =>   'success',
-                'post'     =>   $post
-            ])->setStatusCode(200);
-
-        } catch (Exception $exception) {
-
-            return response()->json([
-                'status'    =>    'error',
-                'message'   =>    $exception->getMessage()
-            ])->setStatusCode(500);
-
-        }
+        return response()->json([
+            'success'  =>    true,
+            'post'     =>    new PostResource($post)
+        ])->setStatusCode(200);
     }
 
     /**
@@ -96,23 +66,12 @@ class PostAPIService
      */
     public function update(PostRequest $request, Post $post): JsonResponse
     {
-        try {
+        $post->update($request->validated());
 
-            $post->update($request->validated());
-
-            return response()->json([
-                'status'    =>    'success',
-                'message'   =>    'Successful updated post'
-            ])->setStatusCode(200);
-
-        } catch (Exception $exception) {
-
-            return response()->json([
-                'status'    =>    'error',
-                'message'   =>    $exception->getMessage()
-            ])->setStatusCode(500);
-
-        }
+        return response()->json([
+            'success'   =>    true,
+            'message'   =>    'Successful updated post'
+        ])->setStatusCode(200);
     }
 
     /**
@@ -123,22 +82,12 @@ class PostAPIService
      */
     public function destroy(Post $post): JsonResponse
     {
-        try {
+        $post->delete();
 
-            $post->delete();
+        return response()->json([
+            'success'   =>    true,
+            'message'   =>    'Successful deleted post'
+        ])->setStatusCode(200);
 
-            return response()->json([
-                'status'    =>    'success',
-                'message'   =>    'Successful deleted post'
-            ])->setStatusCode(200);
-
-        } catch (Exception $exception) {
-
-            return response()->json([
-                'status'    =>    'error',
-                'message'   =>    $exception->getMessage()
-            ])->setStatusCode(500);
-
-        }
     }
 }
