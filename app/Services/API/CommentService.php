@@ -10,6 +10,7 @@ use App\Models\Post;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class CommentService
@@ -28,11 +29,12 @@ class CommentService
     }
 
     /**
+     * @param   Request $request
      * @return  PromiseInterface|Response
      */
-    public function getAllComments(): PromiseInterface|Response
+    public function getAllComments(Request $request): PromiseInterface|Response
     {
-        return $this->http->get(route('api.comments.index'));
+        return $this->http->get(route('api.comments.index'), ['page' => $request->get('page')]);
     }
 
     /**

@@ -15,9 +15,10 @@ class CommentAPIService
     /**
      * Display a listing of the resource.
      *
+     * @param   $page
      * @return  JsonResponse
      */
-    public function index(): JsonResponse
+    public function index($page = 1): JsonResponse
     {
         return response()->json([
             'success'   =>    true,
@@ -38,6 +39,7 @@ class CommentAPIService
 
         return response()->json([
             'success'   =>    true,
+            'message'   =>    'Successful added comment'
         ])->setStatusCode(201);
     }
 

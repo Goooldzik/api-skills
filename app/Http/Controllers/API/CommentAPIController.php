@@ -29,11 +29,12 @@ class CommentAPIController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param   $page
      * @return  JsonResponse
      */
-    public function index(): JsonResponse
+    public function index($page = 1): JsonResponse
     {
-        return $this->commentAPIService->index();
+        return $this->commentAPIService->index($page);
     }
 
     /**
