@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Http\Requests\PostRequest;
-use App\Services\API\APIService;
+use App\Services\API\PostService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,7 +33,7 @@ class CreatePostJob implements ShouldQueue
      */
     public function handle()
     {
-        $api = new APIService();
+        $api = new PostService();
 
         $request = new PostRequest([
             'title'     =>   'Automatyczny post',
