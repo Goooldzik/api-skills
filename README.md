@@ -1,3 +1,5 @@
+<h2>O projekcie</h2>
+<p>Projekt ma za zadanie pokazać umiejętności tworzenia API, oraz korzystania z zewnętrznego API poprzez serwis.</p>
 <h2>Instalacja</h2>
 <ol>
     <li>Sklonuj repozytorium</li>
